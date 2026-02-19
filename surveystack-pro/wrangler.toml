@@ -2,6 +2,10 @@ name = "surveystack-pro"
 main = "src/index.js"
 compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
+account_id = "b2ce7728512991a0a4392606306779d7"
+
+# Deploy to workers.dev first, then add custom domains
+workers_dev = true
 
 # ── D1 Databases ──────────────────────────────────────────
 [[d1_databases]]
@@ -12,16 +16,17 @@ database_id = "2f3911d5-dc22-41fe-be6c-1c10742f73e7"
 # ── KV Namespaces ─────────────────────────────────────────
 [[kv_namespaces]]
 binding = "CACHE"
-id = "REPLACE_WITH_KV_ID"
+id = "008989f2d030491c8d45e0bf93c3c454"
 
 [[kv_namespaces]]
 binding = "SESSIONS"
-id = "REPLACE_WITH_SESSIONS_KV_ID"
+id = "ad59b249d4404c62b3d6c2a239eab15a"
 
 # ── R2 Buckets ────────────────────────────────────────────
-[[r2_buckets]]
-binding = "MEDIA"
-bucket_name = "surveystack-media"
+# Enable R2 in Cloudflare Dashboard first, then uncomment:
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "surveystack-media"
 
 # ── Environment Variables ─────────────────────────────────
 [vars]
@@ -39,47 +44,50 @@ IMPACT_WEBHOOK_URL = ""
 # ADMIN_PASSWORD, ANTHROPIC_API_KEY, SMTP_API_KEY
 
 # ── Domain Routes ─────────────────────────────────────────
-# Survey Domains
-routes = [
-  # Travel & Lifestyle
-  { pattern = "travelsurvey.com/*", custom_domain = true },
-  { pattern = "travelsurveys.com/*", custom_domain = true },
-  { pattern = "travelpolls.com/*", custom_domain = true },
-  # Home & Real Estate
-  { pattern = "homesurvey.com/*", custom_domain = true },
-  { pattern = "homesurveys.com/*", custom_domain = true },
-  # Food & Dining
-  { pattern = "foodsurvey.com/*", custom_domain = true },
-  { pattern = "foodsurveys.com/*", custom_domain = true },
-  { pattern = "restaurantsurvey.com/*", custom_domain = true },
-  # Health & Wellness
-  { pattern = "healthpoll.com/*", custom_domain = true },
-  { pattern = "healthpolls.com/*", custom_domain = true },
-  { pattern = "healthsurvey.com/*", custom_domain = true },
-  # Tech & Code
-  { pattern = "codesurvey.com/*", custom_domain = true },
-  { pattern = "techsurvey.com/*", custom_domain = true },
-  { pattern = "techsurveys.com/*", custom_domain = true },
-  # Sports & Entertainment
-  { pattern = "sportspoll.com/*", custom_domain = true },
-  { pattern = "sportspolls.com/*", custom_domain = true },
-  { pattern = "sportsurvey.com/*", custom_domain = true },
-  { pattern = "moviesurvey.com/*", custom_domain = true },
-  { pattern = "musicsurvey.com/*", custom_domain = true },
-  # Business & Finance
-  { pattern = "bizsurvey.com/*", custom_domain = true },
-  { pattern = "financesurvey.com/*", custom_domain = true },
-  { pattern = "startupsurvey.com/*", custom_domain = true },
-  # Education
-  { pattern = "edusurvey.com/*", custom_domain = true },
-  { pattern = "campussurvey.com/*", custom_domain = true },
-  # Environment & Impact
-  { pattern = "greensurvey.com/*", custom_domain = true },
-  { pattern = "climatesurvey.com/*", custom_domain = true },
-  # General Polls
-  { pattern = "quickpoll.com/*", custom_domain = true },
-  { pattern = "dailypoll.com/*", custom_domain = true },
-  { pattern = "nationalpoll.com/*", custom_domain = true },
-  # Platform hub
-  { pattern = "surveystack.com/*", custom_domain = true },
-]
+# PHASE 1: Deploy to workers.dev first (workers_dev = true above)
+# PHASE 2: Uncomment routes below after domains are on Cloudflare DNS
+#
+# To add a domain: ensure its DNS is managed by Cloudflare,
+# then add a route entry here and run: npx wrangler deploy
+#
+# routes = [
+#   # Crown Jewels - Travel
+#   { pattern = "tripsurvey.com/*", custom_domain = true },
+#   { pattern = "hawaiisurvey.com/*", custom_domain = true },
+#   { pattern = "travelpoll.com/*", custom_domain = true },
+#   # Crown Jewels - Home
+#   { pattern = "homepoll.com/*", custom_domain = true },
+#   { pattern = "homesurvey.com/*", custom_domain = true },
+#   { pattern = "realtysurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Health
+#   { pattern = "drugsurvey.com/*", custom_domain = true },
+#   { pattern = "healthpoll.com/*", custom_domain = true },
+#   # Crown Jewels - Food
+#   { pattern = "barsurvey.com/*", custom_domain = true },
+#   { pattern = "coffeesurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Tech
+#   { pattern = "javapoll.com/*", custom_domain = true },
+#   { pattern = "datasurvey.com/*", custom_domain = true },
+#   { pattern = "codesurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Finance
+#   { pattern = "stocksurvey.com/*", custom_domain = true },
+#   { pattern = "401ksurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Education
+#   { pattern = "studentpoll.com/*", custom_domain = true },
+#   { pattern = "studentsurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Environment
+#   { pattern = "ecosurvey.com/*", custom_domain = true },
+#   { pattern = "solarsurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Business
+#   { pattern = "surveyboard.com/*", custom_domain = true },
+#   { pattern = "retailsurvey.com/*", custom_domain = true },
+#   # Crown Jewels - Entertainment
+#   { pattern = "gamingpoll.com/*", custom_domain = true },
+#   { pattern = "gamepoll.com/*", custom_domain = true },
+#   # Crown Jewels - Politics
+#   { pattern = "electionpoll.com/*", custom_domain = true },
+#   { pattern = "politicalsurvey.com/*", custom_domain = true },
+#   # Platform hub
+#   { pattern = "surveyventures.com/*", custom_domain = true },
+#   { pattern = "surveystack.com/*", custom_domain = true },
+# ]
