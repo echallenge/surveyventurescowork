@@ -1,0 +1,24 @@
+{
+  "name": "surveystack-pro",
+  "version": "2.0.0",
+  "description": "World-leading AI-powered survey & engagement platform — 1000+ domains, blogs, newsletters, stores, referrals, social sharing, impact data pipeline",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute surveystack-db --file=./migrations/001_init.sql",
+    "db:migrate": "wrangler d1 execute surveystack-db --file=./migrations/002_platform_v2.sql",
+    "db:seed": "wrangler d1 execute surveystack-db --file=./migrations/003_seed_domains.sql",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  },
+  "author": "VentureOS / AgentDAO / eCorp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecorp/surveystack-pro"
+  }
+}

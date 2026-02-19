@@ -1,0 +1,23 @@
+name = "surveystack"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "surveystack-db"
+database_id = "2f3911d5-dc22-41fe-be6c-1c10742f73e7"
+
+[vars]
+ADMIN_PASSWORD = "changeme123"
+ANTHROPIC_API_KEY = ""
+
+# Custom domains - add all your survey domains here
+# Each domain should have a CNAME or A record pointing to your worker
+routes = [
+  { pattern = "homesurvey.com/*", custom_domain = true },
+  { pattern = "travelsurvey.com/*", custom_domain = true },
+  { pattern = "codesurvey.com/*", custom_domain = true },
+  { pattern = "foodsurvey.com/*", custom_domain = true },
+  { pattern = "healthpoll.com/*", custom_domain = true }
+]

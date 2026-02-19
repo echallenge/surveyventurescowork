@@ -1,0 +1,85 @@
+name = "surveystack-pro"
+main = "src/index.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── D1 Databases ──────────────────────────────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "surveystack-db"
+database_id = "2f3911d5-dc22-41fe-be6c-1c10742f73e7"
+
+# ── KV Namespaces ─────────────────────────────────────────
+[[kv_namespaces]]
+binding = "CACHE"
+id = "REPLACE_WITH_KV_ID"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "REPLACE_WITH_SESSIONS_KV_ID"
+
+# ── R2 Buckets ────────────────────────────────────────────
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "surveystack-media"
+
+# ── Environment Variables ─────────────────────────────────
+[vars]
+PLATFORM_NAME = "SurveyStack"
+PLATFORM_VERSION = "2.0.0"
+VENTURE_OS_URL = "https://ventureos.com"
+AGENT_DAO_URL = "https://agentdao.com"
+REFERRALS_URL = "https://referrals.com"
+VNOC_URL = "https://vnoc.com"
+CONTRIB_URL = "https://contrib.com"
+ESHARES_URL = "https://eshares.com"
+COCEO_URL = "https://coceo.com"
+IMPACT_WEBHOOK_URL = ""
+# Secrets (set via wrangler secret put):
+# ADMIN_PASSWORD, ANTHROPIC_API_KEY, SMTP_API_KEY
+
+# ── Domain Routes ─────────────────────────────────────────
+# Survey Domains
+routes = [
+  # Travel & Lifestyle
+  { pattern = "travelsurvey.com/*", custom_domain = true },
+  { pattern = "travelsurveys.com/*", custom_domain = true },
+  { pattern = "travelpolls.com/*", custom_domain = true },
+  # Home & Real Estate
+  { pattern = "homesurvey.com/*", custom_domain = true },
+  { pattern = "homesurveys.com/*", custom_domain = true },
+  # Food & Dining
+  { pattern = "foodsurvey.com/*", custom_domain = true },
+  { pattern = "foodsurveys.com/*", custom_domain = true },
+  { pattern = "restaurantsurvey.com/*", custom_domain = true },
+  # Health & Wellness
+  { pattern = "healthpoll.com/*", custom_domain = true },
+  { pattern = "healthpolls.com/*", custom_domain = true },
+  { pattern = "healthsurvey.com/*", custom_domain = true },
+  # Tech & Code
+  { pattern = "codesurvey.com/*", custom_domain = true },
+  { pattern = "techsurvey.com/*", custom_domain = true },
+  { pattern = "techsurveys.com/*", custom_domain = true },
+  # Sports & Entertainment
+  { pattern = "sportspoll.com/*", custom_domain = true },
+  { pattern = "sportspolls.com/*", custom_domain = true },
+  { pattern = "sportsurvey.com/*", custom_domain = true },
+  { pattern = "moviesurvey.com/*", custom_domain = true },
+  { pattern = "musicsurvey.com/*", custom_domain = true },
+  # Business & Finance
+  { pattern = "bizsurvey.com/*", custom_domain = true },
+  { pattern = "financesurvey.com/*", custom_domain = true },
+  { pattern = "startupsurvey.com/*", custom_domain = true },
+  # Education
+  { pattern = "edusurvey.com/*", custom_domain = true },
+  { pattern = "campussurvey.com/*", custom_domain = true },
+  # Environment & Impact
+  { pattern = "greensurvey.com/*", custom_domain = true },
+  { pattern = "climatesurvey.com/*", custom_domain = true },
+  # General Polls
+  { pattern = "quickpoll.com/*", custom_domain = true },
+  { pattern = "dailypoll.com/*", custom_domain = true },
+  { pattern = "nationalpoll.com/*", custom_domain = true },
+  # Platform hub
+  { pattern = "surveystack.com/*", custom_domain = true },
+]
