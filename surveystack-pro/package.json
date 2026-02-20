@@ -11,9 +11,8 @@
     "db:seed": "wrangler d1 execute surveystack-db --file=./migrations/003_seed_domains.sql",
     "tail": "wrangler tail"
   },
-  "dependencies": {},
   "devDependencies": {
-    "wrangler": "^3.99.0"
+    "wrangler": "^3.114.17"
   },
   "author": "VentureOS / AgentDAO / eCorp",
   "license": "MIT",

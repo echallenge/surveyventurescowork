@@ -45,25 +45,26 @@ export default {
       return new Response(null, { headers: corsHeaders(hostname) });
     }
 
-    // ── Ensure domain exists in DB ────────────────────────────
-    let domain = await getOrCreateDomain(env, hostname);
-
-    // ── Build context object passed to all handlers ───────────
-    const context = {
-      request, env, ctx, url, hostname, path, method, domain,
-      config: getDomainConfig(hostname),
-    };
-
-    // ── Track page view ───────────────────────────────────────
-    ctx.waitUntil(trackAnalytics(env, domain.id, 'page_view', {
-      path,
-      referrer: request.headers.get('referer') || '',
-      userAgent: request.headers.get('user-agent') || '',
-      country: request.cf?.country || '',
-      city: request.cf?.city || '',
-    }));
-
     try {
+      // ── Ensure domain exists in DB ────────────────────────────
+      let domain = await getOrCreateDomain(env, hostname);
+
+      // ── Build context object passed to all handlers ───────────
+      const context = {
+        request, env, ctx, url, hostname, path, method, domain,
+        config: getDomainConfig(hostname),
+      };
+
+      // ── Track page view ───────────────────────────────────────
+      if (domain && domain.id) {
+        ctx.waitUntil(trackAnalytics(env, domain.id, 'page_view', {
+          path,
+          referrer: request.headers.get('referer') || '',
+          userAgent: request.headers.get('user-agent') || '',
+          country: request.cf?.country || '',
+          city: request.cf?.city || '',
+        }));
+      }
       // ── Route: Agent card (.well-known) ──────────────────────
       if (path.startsWith('/.well-known/')) {
         return handleAgentRoutes(context);
@@ -145,13 +146,13 @@ async function getOrCreateDomain(env, hostname) {
     const config = getDomainConfig(hostname);
 
     await env.DB.prepare(`
-      INSERT INTO domains (hostname, topic, title, description, vertical,
+      INSERT INTO domains (hostname, name, topic, title, description, vertical,
         primary_color, secondary_color,
         features_survey, features_blog, features_newsletter,
         features_store, features_referrals, features_social, features_impact)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).bind(
-      hostname, topic, config.title, config.description, vertical,
+      hostname, hostname, topic, config.title, config.description, vertical,
       config.color, config.accent,
       config.features.survey ? 1 : 0,
       config.features.blog ? 1 : 0,

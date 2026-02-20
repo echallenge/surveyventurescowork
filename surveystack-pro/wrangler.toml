@@ -11,16 +11,16 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "surveystack-db"
-database_id = "2f3911d5-dc22-41fe-be6c-1c10742f73e7"
+database_id = "6f77ad4f-2e3d-49f1-96c9-a12e045176af"
 
 # ── KV Namespaces ─────────────────────────────────────────
 [[kv_namespaces]]
 binding = "CACHE"
-id = "008989f2d030491c8d45e0bf93c3c454"
+id = "9bf6d06baa534e7c8560a3496459ed9a"
 
 [[kv_namespaces]]
 binding = "SESSIONS"
-id = "ad59b249d4404c62b3d6c2a239eab15a"
+id = "e6f219d11ec645e58d83a3832ee7ec2b"
 
 # ── R2 Buckets ────────────────────────────────────────────
 # Enable R2 in Cloudflare Dashboard first, then uncomment:
